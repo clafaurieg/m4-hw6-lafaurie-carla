@@ -1,19 +1,16 @@
 // This function gets user input and creates a new pizza order object
 // You only need to add code to this function
 function getPizzaOrder() {
-  var extraCheeseUpcharge = 1.5;
-  var thickCrustUpcharge = 2;
-  var deliveryFee = 3.5;
-  var toppingsFee = 1.5;
-  var basePrice = 10;
+  var extraCheeseUpcharge = 1.5
+  var thickCrustUpcharge = 2
+  var deliveryFee = 3.5
+  var toppingsFee = 1.5
+  var basePrice = 10
 
   alert("Hi, Thanks for ordering with Web to Pizza!")
   var pizza = {
     // set the 'cost' property to the basePrice
-    // YOUR CODE HERE
-
-    cost: basePrice,
-
+    cost: basePrice
   }
 
   var crust = prompt(
@@ -24,25 +21,16 @@ function getPizzaOrder() {
   // HINT: You may wish to use .toLowerCase() and .trim()
   // if the user specified 'thick' crust, add thickCrustUpcharge
   // to pizza.cost
-  // YOUR CODE HERE
+ 
+  pizza.crust = crust.trim().toLowerCase();
+  console.log("You ordered", pizza.crust, "crust.");
 
-  pizza.crust = crust
   if (pizza.crust === "thick") {
-
-    pizza.cost += thickCrustUpcharge
+    pizza.cost += thickCrustUpcharge;
+  } else {
+    pizza.cost = basePrice;
   }
-
-  pizza.crust = crust
-  if (pizza.crust === "thin") {
-
-
-    pizza.cost += thickCrustUpcharge
-
-  }
-
-
-
-
+  console.log("Total price of pizza so far", pizza.cost);
 
   var toppings = prompt("Please enter additional toppings (comma separated)")
   // HINT: prompt() will return an empty string "" if the user presses 'OK' without entering a value
@@ -50,87 +38,42 @@ function getPizzaOrder() {
   // if no toppings are given, make sure pizza.toppings is set to []
   // if the user has added toppings, add toppingsFee multiplied by
   // the number of toppings added to pizza.cost
-  // YOUR CODE HERE
 
-  if(toppings === ""){
-    pizza.toppings = []
-  }else{
-  pizza.toppings = toppings.split(",")
- toppingsFee = toppingsFee * pizza.toppings.length
-  pizza.cost += toppingsFee
-  }
-
-  // if (toppings === "") {
-  //   pizza.toppings = []
-  // } else {
-  //   pizza.toppings = toppings.split(",")
-  //   pizza.cost = toppingsFee * (pizza.toppings.length + deliveryFee + basePrice + thickCrustUpcharge + extraCheeseUpcharge);
-  // }
-
-
-
-  
+let pizza;
+  pizza.toppings = [];
+        pizza.toppings = toppings.split(',');
+        for (let i = 0; i < pizza.toppings.length; i++){
+         pizza.cost += +pizza.toppings[i] * toppingsFee;
+        }
 
   var extraCheese = confirm("Would you like extra cheese?")
-
-  // HINT: confirm() returns a boolean 
+  // HINT: confirm() returns a boolean
   // if the user specifies extra cheese, set pizza.extraCheese to true or false
   // if the user specifies extra cheese, add extraCheeseUpcharge to pizza.cost
-  // YOUR CODE HERE
 
-  
-
-
-if(extraCheese){
- pizza.extraCheese = true
- pizza.cost += extraCheeseUpcharge
-}else{
-  pizza.extraCheese = false
-}
-
-  // if (extraCheese == true) {
-  //   pizza.extraCheese = true;
-  //   extraCheese = extraCheeseUpcharge + pizza.cost;
-  // } else {
-  //   pizza.extraCheese = false;
-  //   extraCheese = pizza.cost;
-  // }
-
-
+  if (extraCheese === true) {
+    pizza.extraCheese = true;
+    pizza.cost = extraCheeseUpcharge + pizza.cost;
+  } else {
+    pizza.extraCheese = false;
+  }
 
 
   var isDelivery = confirm("Is your order for Delivery?")
-
   // HINT: confirm() returns a boolean
   // if order is for delivery, set pizza.saleType to "delivery"
   // if order is NOT for delivery, set pizza.saleType to "take-out"
   // if order if for delivery, add deliveryFee to pizza.cost
-  // YOUR CODE HERE
-
-if(isDelivery){
-  pizza.saleType = "delivery"
-  pizza.cost += deliveryFee
-}else{
-  pizza.saleType ="take-out"
-}
-  // if (isDelivery == true) {
-  //   pizza.saleType = 'Delivery'
-  // } else {
-  //   pizza.saleType = 'Takeout'
-  // }
+  
+  if (isDelivery === true) {
+    pizza.cost += deliveryFee;
+    pizza.saleType = "delivery";
+  } else {
+    pizza.saleType = "take-out";
+  }
 
   return pizza
 }
-
-
-const cart = ['Delivery', 'Takeout'];
-cart.push('pizza'); 
-
-const numbers = [3.5];
-numbers.push(3.5);
-
-
-
 
 // This function is attached to the Order Now Button
 // This function is COMPLETE. No work to do here
@@ -153,22 +96,22 @@ function renderOrder(pizzaStr) {
 // This function is COMPLETE. No work to do here
 function getOrderString(pizza) {
   return `
-    Order Information
-    -----------------
-    Delivery or Takeout: ${pizza.saleType}
-    Crust: ${pizza.crust || 'Regular'}
-    Toppings: ${(Array.isArray(pizza.toppings) &&
+  Order Information
+  -----------------
+  Delivery or Takeout: ${pizza.saleType}
+  Crust: ${pizza.crust || 'Regular'}
+  Toppings: ${(Array.isArray(pizza.toppings) &&
       pizza.toppings.filter(topping => topping).length > 0)
       ? pizza
         .toppings
         .map(topping => '\n  --' + topping)
       : 'No Extra Toppings'
     }
-    Extra Cheese: ${pizza.extraCheese === true ? "Yes" : "No"}
-    -----------------
-    Subtotal: ${formatPrice(pizza.cost)}
-    Total: ${formatPrice(pizza.cost * 0.07 + pizza.cost)}
-    `
+  Extra Cheese: ${pizza.extraCheese === true ? "Yes" : "No"}
+  -----------------
+  Subtotal: ${formatPrice(pizza.cost)}
+  Total: ${formatPrice(pizza.cost * 0.07 + pizza.cost)}
+  `
 }
 
 // this function turns a float number into USD price formatting
