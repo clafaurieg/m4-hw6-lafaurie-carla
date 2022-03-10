@@ -11,7 +11,7 @@ function getPizzaOrder() {
   var pizza = {
     // set the 'cost' property to the basePrice
     cost: basePrice
-  }
+  };
 
   var crust = prompt(
     `Please enter the type of crust (${formatPrice(thickCrustUpcharge)} upcharge for Thick crust)`
@@ -22,15 +22,11 @@ function getPizzaOrder() {
   // if the user specified 'thick' crust, add thickCrustUpcharge
   // to pizza.cost
  
-  pizza.crust = crust.trim().toLowerCase();
-  console.log("You ordered", pizza.crust, "crust.");
+  ppizza.crust = crust.toLowerCase();
 
-  if (pizza.crust === "thick") {
-    pizza.cost += thickCrustUpcharge;
-  } else {
-    pizza.cost = basePrice;
+  if (pizza.crust == 'thick') {
+    pizza.cost = pizza.cost + thickCrustUpcharge;
   }
-  console.log("Total price of pizza so far", pizza.cost);
 
   var toppings = prompt("Please enter additional toppings (comma separated)")
   // HINT: prompt() will return an empty string "" if the user presses 'OK' without entering a value
