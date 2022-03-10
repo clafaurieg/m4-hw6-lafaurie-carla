@@ -27,7 +27,7 @@ function getPizzaOrder() {
   if (pizza.crust == 'thick') {
     pizza.cost = pizza.cost + thickCrustUpcharge;
   }
-  
+
 
 
   var toppings = prompt("Please enter additional toppings (comma separated)")
@@ -36,7 +36,13 @@ function getPizzaOrder() {
   // if no toppings are given, make sure pizza.toppings is set to []
   // if the user has added toppings, add toppingsFee multiplied by
   // the number of toppings added to pizza.cost
-  // YOUR CODE HERE
+
+let pizza;
+  pizza.toppings = [];
+        pizza.toppings = toppings.split(',');
+        for (let i = 0; i < pizza.toppings.length; i++){
+         pizza.cost += +pizza.toppings[i] * toppingsFee;
+        }
 
   var extraCheese = confirm("Would you like extra cheese?")
   // HINT: confirm() returns a boolean
