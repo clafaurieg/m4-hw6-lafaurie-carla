@@ -44,7 +44,7 @@ function getPizzaOrder() {
       pizza.toppings = [];
   } else if (toppings === null) {
     pizza.toppings = [];
-  } else {
+  } or {
     pizza.toppings = toppings.split(',');
     for (let i = 0; i < pizza.toppings.length; i++){
       pizza.cost += toppingsFee;
