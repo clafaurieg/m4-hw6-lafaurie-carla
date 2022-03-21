@@ -1,3 +1,4 @@
+
 // This function gets user input and creates a new pizza order object
 // You only need to add code to this function
 function getPizzaOrder() {
@@ -13,7 +14,6 @@ function getPizzaOrder() {
     cost: basePrice
   }
 
-  
   var crust = prompt(`Please enter the type of crust (${formatPrice(thickCrustUpcharge)} upcharge for Thick crust)`
   )
   // set the pizza object's 'crust' property to the user's response
@@ -21,17 +21,16 @@ function getPizzaOrder() {
   // HINT: You may wish to use .toLowerCase() and .trim()
   // if the user specified 'thick' crust, add thickCrustUpcharge
   // to pizza.cost
-  // YOUR CODE HERE
-  
-pizza.crust = crust.trim().toLowerCase();
-  console.log("You ordered", pizza.crust, "crust.");
+
+  pizza.crust = crust.trim().toLowerCase();
 
   if (pizza.crust === "thick") {
     pizza.cost += thickCrustUpcharge;
   } else {
     pizza.cost = basePrice;
   }
-  console.log("Total price of pizza so far", pizza.cost);
+
+
 
   var toppings = prompt("Please enter additional toppings (comma separated)")
   // HINT: prompt() will return an empty string "" if the user presses 'OK' without entering a value
@@ -40,12 +39,18 @@ pizza.crust = crust.trim().toLowerCase();
   // if the user has added toppings, add toppingsFee multiplied by
   // the number of toppings added to pizza.cost
 
-let pizza;
-  pizza.toppings = [];
-        pizza.toppings = toppings.split(',');
-        for (let i = 0; i < pizza.toppings.length; i++){
-         pizza.cost += +pizza.toppings[i] * toppingsFee;
-        }
+  if (toppings === "") {
+      pizza.toppings = [];
+  } else if (toppings === null) {
+    pizza.toppings = [];
+  } else {
+    pizza.toppings = toppings.split(',');
+    for (let i = 0; i < pizza.toppings.length; i++){
+      pizza.cost += toppingsFee;
+  }
+  }
+
+
 
   var extraCheese = confirm("Would you like extra cheese?")
   // HINT: confirm() returns a boolean
@@ -54,10 +59,12 @@ let pizza;
 
   if (extraCheese === true) {
     pizza.extraCheese = true;
-    pizza.cost = extraCheeseUpcharge + pizza.cost;
+    pizza.cost += extraCheeseUpcharge;
   } else {
     pizza.extraCheese = false;
   }
+
+
 
 
   var isDelivery = confirm("Is your order for Delivery?")
@@ -65,13 +72,14 @@ let pizza;
   // if order is for delivery, set pizza.saleType to "delivery"
   // if order is NOT for delivery, set pizza.saleType to "take-out"
   // if order if for delivery, add deliveryFee to pizza.cost
-  
+
   if (isDelivery === true) {
     pizza.cost += deliveryFee;
     pizza.saleType = "delivery";
   } else {
     pizza.saleType = "take-out";
   }
+
 
   return pizza
 }
@@ -125,3 +133,4 @@ function formatPrice(price) {
   })
   return formatter.format(price)
 }
+
